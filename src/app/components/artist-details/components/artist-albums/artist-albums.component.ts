@@ -12,7 +12,7 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 export class ArtistAlbumsComponent implements OnChanges, OnDestroy {
     @Input() $route!: Observable<string>;
 
-    public albums?: Album[];
+    public albums: Album[] = [];
     public loading_albums: boolean = true;
 
     private albums_sub?: Subscription;

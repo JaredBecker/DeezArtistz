@@ -1,1 +1,7 @@
-<p>artist-top-songs works!</p>
+<section class="top_songs">
+    <ul *ngIf="!loading_top_songs && top_songs.length > 0">
+        <li *ngFor="let song of top_songs">
+            {{ song.title }}
+        </li>
+    </ul>
+</section>

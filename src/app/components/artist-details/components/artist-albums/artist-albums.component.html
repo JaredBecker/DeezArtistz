@@ -1,1 +1,7 @@
-<p>artist-albums works!</p>
+<section class="artist_albums py-3">
+    <ul *ngIf="!loading_albums && albums.length > 0">
+        <li *ngFor="let album of albums">
+            {{ album.title }}
+        </li>
+    </ul>
+</section>

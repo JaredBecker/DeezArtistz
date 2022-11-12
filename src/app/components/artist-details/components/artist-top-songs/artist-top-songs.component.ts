@@ -12,7 +12,7 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 export class ArtistTopSongsComponent implements OnChanges, OnDestroy {
     @Input() $route!: Observable<string>;
 
-    public top_songs?: Track[];
+    public top_songs: Track[] = [];
     public loading_top_songs: boolean = true;
 
     private top_songs_sub?: Subscription;
