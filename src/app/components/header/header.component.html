@@ -10,8 +10,11 @@
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                name="search"
+                [formControl]="search"
+                (keydown)="onSearchArtistsEnter($event)"
             />
-            <button type="button" class="btn btn-primary search_btn">
+            <button type="button" class="btn btn-primary search_btn" (click)="onSearchArtistsClick()">
                 <span class="visually-hidden">Search for artists</span>
                 <i class="fa-solid fa-magnifying-glass text-white" aria-hidden="true"></i>
             </button>

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    proxy_url: 'https://cors-anywhere.herokuapp.com/',
+    api_url: 'https://api.deezer.com/',
 };
 
 /*
