@@ -10,6 +10,9 @@ import { ArtistListingComponent } from './components/artist-listing/artist-listi
 import { ArtistCardComponent } from './components/artist-listing/components/artist-card/artist-card.component';
 import { ArtistDetailsComponent } from './components/artist-details/artist-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ArtistInfoComponent } from './components/artist-details/components/artist-info/artist-info.component';
+import { ArtistTopSongsComponent } from './components/artist-details/components/artist-top-songs/artist-top-songs.component';
+import { ArtistAlbumsComponent } from './components/artist-details/components/artist-albums/artist-albums.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +22,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
         ArtistCardComponent,
         ArtistDetailsComponent,
         NotFoundComponent,
+        ArtistInfoComponent,
+        ArtistTopSongsComponent,
+        ArtistAlbumsComponent,
     ],
     imports: [
         BrowserModule,
