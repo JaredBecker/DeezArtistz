@@ -13,8 +13,10 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 export class ArtistDetailsComponent implements OnInit, OnDestroy {
     public artist?: Artist;
     public loading_artist: boolean = true;
+    public loading_top_songs: boolean = true;
 
     private artist_sub?: Subscription;
+    private top_songs_sub?: Subscription;
 
     constructor(
         private router: Router,
@@ -60,9 +62,29 @@ export class ArtistDetailsComponent implements OnInit, OnDestroy {
                     this.loading_artist = false;
                 }
             })
+
+        this.top_songs_sub = $route
+            .pipe(
+                switchMap((id) => {
+                    this.loading_top_songs = true;
+
+                    if (+id) {
+                        console.log(id);
+                        return this.artistDetailsService.getArtistsTopSongsByID(+id);
+                    } else {
+                        return throwError(() => new Error(`No artist found with the id: ${id}`));
+                    }
+                })
+            )
+            .subscribe({
+                next: ((songs) => {
+                    console.log(songs);
+                })
+            })
     }
 
     public ngOnDestroy(): void {
         this.artist_sub?.unsubscribe();
+        this.top_songs_sub?.unsubscribe();
     }
 }
