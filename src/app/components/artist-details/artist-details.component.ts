@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { map, Observable, of, shareReplay, Subscription, switchMap, tap, throwError } from 'rxjs';
+import { Album } from 'src/app/models/album.model';
 import { Artist } from 'src/app/models/artist.model';
+import { Track } from 'src/app/models/track.model';
 import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 
 @Component({
@@ -12,11 +14,16 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 })
 export class ArtistDetailsComponent implements OnInit, OnDestroy {
     public artist?: Artist;
+    public top_songs?: Track[];
+    public albums?: Album[];
+
     public loading_artist: boolean = true;
     public loading_top_songs: boolean = true;
+    public loading_albums: boolean = true;
 
     private artist_sub?: Subscription;
     private top_songs_sub?: Subscription;
+    private albums_sub?: Subscription;
 
     constructor(
         private router: Router,
@@ -69,22 +76,48 @@ export class ArtistDetailsComponent implements OnInit, OnDestroy {
                     this.loading_top_songs = true;
 
                     if (+id) {
-                        console.log(id);
                         return this.artistDetailsService.getArtistsTopSongsByID(+id);
                     } else {
-                        return throwError(() => new Error(`No artist found with the id: ${id}`));
+                        return throwError(() => new Error(`No tracks found for artist with the id: ${id}`));
                     }
                 })
             )
             .subscribe({
-                next: ((songs) => {
-                    console.log(songs);
+                next: (track_response) => {
+                    this.top_songs = track_response.data;
+                    this.loading_top_songs = false;
+                },
+                error: () => {
+                    this.loading_top_songs = false;
+                }
+            })
+
+        this.albums_sub = $route
+            .pipe(
+                switchMap((id) => {
+                    this.loading_albums = true;
+
+                    if (+id) {
+                        return this.artistDetailsService.getArtistsAlbumsByID(+id);
+                    } else {
+                        return throwError(() => new Error(`No albums found for artist with the id: ${id}`));
+                    }
                 })
+            )
+            .subscribe({
+                next: (album_response) => {
+                    this.albums = album_response.data;
+                    this.loading_albums = false;
+                },
+                error: () => {
+                    this.loading_albums = false;
+                }
             })
     }
 
     public ngOnDestroy(): void {
         this.artist_sub?.unsubscribe();
         this.top_songs_sub?.unsubscribe();
+        this.albums_sub?.unsubscribe();
     }
 }

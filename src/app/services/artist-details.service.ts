@@ -5,6 +5,7 @@ import { Observable, shareReplay, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Artist } from '../models/artist.model';
+import { AlbumResponse } from '../models/album-response.interface';
 import { TrackResponse } from '../models/track-response.interface';
 
 @Injectable({
@@ -21,6 +22,7 @@ export class ArtistDetailsService {
 
     private artist_stream_map = new Map<number, Observable<Artist>>();
     private artist_top_songs_stream_map = new Map<number, Observable<TrackResponse>>();
+    private artist_albums_stream_map = new Map<number, Observable<AlbumResponse>>();
 
     constructor(
         private http: HttpClient,
@@ -34,13 +36,13 @@ export class ArtistDetailsService {
         const stream = this.artist_stream_map.get(id);
 
         if (!stream) {
-            return throwError(() => new Error('No stream found'));
+            return throwError(() => new Error('No artist stream found'));
         }
 
         return stream;
     }
 
-    public getArtistsTopSongsByID(id: number) {
+    public getArtistsTopSongsByID(id: number): Observable<TrackResponse> {
         if (!this.artist_top_songs_stream_map.has(id)) {
             this.storeArtistsTopSongsStream(id);
         }
@@ -48,13 +50,27 @@ export class ArtistDetailsService {
         const stream = this.artist_top_songs_stream_map.get(id);
 
         if (!stream) {
-            return throwError(() => new Error('No stream found'));
+            return throwError(() => new Error('No track stream found'));
         }
 
         return stream;
     }
 
-    public getArtistStream(id: number) {
+    public getArtistsAlbumsByID(id: number): Observable<AlbumResponse> {
+        if (!this.artist_albums_stream_map.has(id)) {
+            this.storeArtistsAlbumsStream(id);
+        }
+
+        const stream = this.artist_albums_stream_map.get(id);
+
+        if (!stream) {
+            return throwError(() => new Error('No album stream found'));
+        }
+
+        return stream;
+    }
+
+    public getArtistStream(id: number): Observable<Artist> {
         return this.http
             .get<Artist>(`${this.request_url}/artist/${id}`)
             .pipe(
@@ -62,7 +78,7 @@ export class ArtistDetailsService {
             );
     }
 
-    public getArtistsTopSongsStream(id: number) {
+    public getArtistsTopSongsStream(id: number): Observable<TrackResponse> {
         return this.http
             .get<TrackResponse>(`${this.request_url}/artist/${id}/top`)
             .pipe(
@@ -70,17 +86,26 @@ export class ArtistDetailsService {
             );
     }
 
+    public getArtistsAlbumsStream(id: number): Observable<AlbumResponse> {
+        return this.http
+            .get<AlbumResponse>(`${this.request_url}/artist/${id}/albums`)
+            .pipe(
+                shareReplay(1)
+            );
+    }
+
     private storeArtistStream(id: number): void {
         const $artist_stream = this.getArtistStream(id);
-
         this.artist_stream_map.set(id, $artist_stream);
     }
 
     private storeArtistsTopSongsStream(id: number): void {
-        const $artist_stream = this.getArtistsTopSongsStream(id);
-
-        this.artist_top_songs_stream_map.set(id, $artist_stream);
+        const $track_stream = this.getArtistsTopSongsStream(id);
+        this.artist_top_songs_stream_map.set(id, $track_stream);
     }
 
-
+    private storeArtistsAlbumsStream(id: number): void {
+        const $album_stream = this.getArtistsAlbumsStream(id);
+        this.artist_albums_stream_map.set(id, $album_stream);
+    }
 }
