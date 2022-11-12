@@ -1,0 +1,19 @@
+.custom_navbar {
+    box-shadow: 0 0 10px -5px rgba(#000, 0.5);
+
+    .logo {
+        display: block;
+
+        img {
+            max-width: 10rem;
+        }
+    }
+
+    .custom_input {
+        border-radius: 5rem;
+    }
+
+    .search_btn {
+        border-radius: 0 5rem 5rem 0;
+    }
+}
