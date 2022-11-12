@@ -2,13 +2,6 @@
     --timing-function: 0.2s cubic-bezier(0.215, 0.610, 0.355, 1)
 }
 
-.no_results {
-    &_image {
-        width: 450px;
-        max-width: 100%;
-    }
-}
-
 .artist_card {
     display: flex;
     flex-direction: column;
@@ -21,7 +14,7 @@
 
     &:hover {
         border-color: rgba($primary, 0.8);
-        box-shadow: 0 0 5px 0 rgba($primary, 0.5);
+        box-shadow: 0 0 5px 0 rgba($secondary, 0.5);
     }
 
     &_image {

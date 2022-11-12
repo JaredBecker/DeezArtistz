@@ -15,10 +15,14 @@ import { ArtistResponse } from '../models/artist-response.interface';
 @Injectable({
     providedIn: 'root'
 })
-export class ArtistService {
+export class ArtistListingService {
     private proxy_url: string = environment.proxy_url ?? '';
     private api_url: string = environment.api_url ?? '';
     private production_mode: boolean = environment.production;
+
+    private request_url: string = this.production_mode ?
+        `${this.api_url}` :
+        `${this.proxy_url}${this.api_url}`;
 
     private artist_subject = new Subject<ArtistResponse>();
 
@@ -71,12 +75,8 @@ export class ArtistService {
      * @returns Observable of type ArtistResponse
      */
     public getArtist(artist: string): Observable<ArtistResponse> {
-        let url = this.production_mode ?
-            `${this.api_url}` :
-            `${this.proxy_url}${this.api_url}`;
-
         return this.http
-            .get<ArtistResponse>(`${url}/search/artist?q=${artist}`)
+            .get<ArtistResponse>(`${this.request_url}/search/artist?q=${artist}`)
             .pipe(
                 shareReplay(1)
             );

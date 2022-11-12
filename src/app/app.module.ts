@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ArtistListingComponent } from './components/artist-listing/artist-listing.component';
 import { ArtistCardComponent } from './components/artist-listing/components/artist-card/artist-card.component';
+import { ArtistDetailsComponent } from './components/artist-details/artist-details.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +17,8 @@ import { ArtistCardComponent } from './components/artist-listing/components/arti
         HeaderComponent,
         ArtistListingComponent,
         ArtistCardComponent,
+        ArtistDetailsComponent,
+        NotFoundComponent,
     ],
     imports: [
         BrowserModule,

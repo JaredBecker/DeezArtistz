@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { ArtistService } from 'src/app/services/artist.service';
+import { ArtistListingService } from 'src/app/services/artist-listing.service';
 
 @Component({
     selector: 'app-header',
@@ -11,7 +11,7 @@ export class HeaderComponent {
     public search = new FormControl('');
 
     constructor(
-        private artistService: ArtistService,
+        private artistListingService: ArtistListingService,
     ) { }
 
     /**
@@ -22,7 +22,7 @@ export class HeaderComponent {
     public onSearchArtistsEnter(event: KeyboardEvent): void {
         if (event?.key === 'Enter') {
             // TODO: add validation to make sure field is filled out first
-            this.artistService.onSearch(this.search.value);
+            this.artistListingService.onSearch(this.search.value);
         }
     }
 
@@ -33,6 +33,6 @@ export class HeaderComponent {
      */
     public onSearchArtistsClick(): void {
         // TODO: add validation to make sure field is filled out first
-        this.artistService.onSearch(this.search.value);
+        this.artistListingService.onSearch(this.search.value);
     }
 }

@@ -1,0 +1,42 @@
+.artist_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e6e6e6;
+
+    @include media-breakpoint-up(sm) {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    &_image {
+        img {
+            max-width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 5px 0 rgba(#000, 0.5);
+        }
+    }
+
+    &_details {
+        text-align: center;
+        margin-top: 1.5rem;
+
+        @include media-breakpoint-up(sm) {
+            margin-left: 1rem;
+            margin-top: 0;
+            text-align: left;
+        }
+
+        &_stats {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            &_item {
+                font-weight: 300;
+                font-size: 1.25rem;
+            }
+        }
+    }
+}

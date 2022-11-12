@@ -1,4 +1,4 @@
-<a [routerLink]="" class="artist_card">
+<a [routerLink]="['artist', artist.id]" class="artist_card">
     <div class="position-relative">
         <div class="artist_card_image ratio ratio-1x1">
             <img [src]="artist.picture_xl" [alt]="artist.name + 'picture'" />
