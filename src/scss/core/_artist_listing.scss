@@ -1,0 +1,55 @@
+:root {
+    --timing-function: 0.2s cubic-bezier(0.215, 0.610, 0.355, 1)
+}
+
+.no_results {
+    &_image {
+        width: 450px;
+        max-width: 100%;
+    }
+}
+
+.artist_card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 0.75rem;
+    height: 100%;
+    transition: border-color var(--timing-function), box-shadow var(--timing-function);
+
+    &:hover {
+        border-color: rgba($primary, 0.8);
+        box-shadow: 0 0 5px 0 rgba($primary, 0.5);
+    }
+
+    &_image {
+        position: relative;
+
+        img {
+            border-radius: 50%;
+            box-shadow: 0 0 5px 0 rgba(#000, 0.5);
+        }
+    }
+
+    &_title {
+        color: $primary;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 0.75rem 0;
+        margin-bottom: 0;
+    }
+
+    &_stats {
+        padding: 0;
+        list-style-type: none;
+        margin: 0;
+        color: $secondary;
+        margin-top: auto;
+
+        &_item {
+            font-weight: 300;
+        }
+    }
+}

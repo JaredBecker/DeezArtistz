@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { ArtistService } from 'src/app/services/artist.service';
@@ -6,16 +6,13 @@ import { ArtistService } from 'src/app/services/artist.service';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent {
     public search = new FormControl('');
 
     constructor(
         private artistService: ArtistService,
     ) { }
-
-    public ngOnInit(): void { }
 
     /**
      * Searches phrase when user presses enter

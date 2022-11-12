@@ -1,1 +1,21 @@
-<p>artist-card works!</p>
+<a [routerLink]="" class="artist_card">
+    <div class="position-relative">
+        <div class="artist_card_image ratio ratio-1x1">
+            <img [src]="artist.picture_xl" [alt]="artist.name + 'picture'" />
+        </div>
+        <h4 class="artist_card_title">
+            {{ artist.name }}
+        </h4>
+    </div>
+    <ul class="artist_card_stats">
+        <li class="artist_card_stats_item d-none d-md-block">
+            <i class="fa-solid fa-compact-disc fa-fw me-2" aria-hidden="true"></i>
+            {{ artist.nb_album }} Albums
+        </li>
+        <li class="artist_card_stats_item">
+            <i class="fa-solid fa-users fa-fw me-2" aria-hidden="true"></i>
+            {{ artist.nb_fan }} Fans
+        </li>
+    </ul>
+</a>
+

@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Artist } from 'src/app/models/artist.model';
 
 @Component({
-  selector: 'app-artist-card',
-  templateUrl: './artist-card.component.html',
-  styleUrls: ['./artist-card.component.scss']
+    selector: 'app-artist-card',
+    templateUrl: './artist-card.component.html',
 })
-export class ArtistCardComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ArtistCardComponent {
+    @Input() artist!: Artist;
 }

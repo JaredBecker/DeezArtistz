@@ -8,7 +8,6 @@ import { ArtistService } from 'src/app/services/artist.service';
 @Component({
     selector: 'app-artist-listing',
     templateUrl: './artist-listing.component.html',
-    styleUrls: ['./artist-listing.component.scss']
 })
 export class ArtistListingComponent implements OnInit, OnDestroy {
     public artists: Artist[] = [];
