@@ -31,7 +31,7 @@ import { ArtistAlbumsComponent } from './components/artist-details/components/ar
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

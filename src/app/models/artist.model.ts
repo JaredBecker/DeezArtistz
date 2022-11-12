@@ -11,7 +11,7 @@ export class Artist {
     public picture_xl: string;
     public radio: boolean;
     public tracklist: string;
-    public type: string; // TODO: make this its own type
+    public type: string;
 
     // Passing a single option to constructor to make it easier to add things to this if need be
     constructor(options: Artist) {

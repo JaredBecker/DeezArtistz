@@ -13,15 +13,15 @@ const routes: Routes = [
     },
     {
         path: 'artist/:id',
-        component: ArtistDetailsComponent
+        component: ArtistDetailsComponent,
     },
     {
         path: 'not-found',
-        component: NotFoundComponent
+        component: NotFoundComponent,
     },
     {
         path: '**',
-        component: NotFoundComponent
+        component: NotFoundComponent,
     }
 ];
 

@@ -28,7 +28,14 @@ export class ArtistDetailsService {
         private http: HttpClient,
     ) { }
 
-    public getArtistByID(id: number) {
+    /**
+     * Gets artist info for the provided ID
+     *
+     * @param id The ID of the artist
+     *
+     * @returns Observable of artist info
+     */
+    public getArtistByID(id: number): Observable<Artist> {
         if (!this.artist_stream_map.has(id)) {
             this.storeArtistStream(id);
         }
@@ -42,6 +49,13 @@ export class ArtistDetailsService {
         return stream;
     }
 
+    /**
+     * Gets artists top songs for the provided ID
+     *
+     * @param id The ID of the artist
+     *
+     * @returns Observable of track response
+     */
     public getArtistsTopSongsByID(id: number): Observable<TrackResponse> {
         if (!this.artist_top_songs_stream_map.has(id)) {
             this.storeArtistsTopSongsStream(id);
@@ -56,6 +70,13 @@ export class ArtistDetailsService {
         return stream;
     }
 
+    /**
+     * Gets artists albums songs for the provided ID
+     *
+     * @param id The ID of the artist
+     *
+     * @returns Observable of album response
+     */
     public getArtistsAlbumsByID(id: number): Observable<AlbumResponse> {
         if (!this.artist_albums_stream_map.has(id)) {
             this.storeArtistsAlbumsStream(id);
@@ -70,7 +91,14 @@ export class ArtistDetailsService {
         return stream;
     }
 
-    public getArtistStream(id: number): Observable<Artist> {
+    /**
+     * Builds artist HTTP request
+     *
+     * @param id The ID of the artist to look for
+     *
+     * @returns Observable of artist info
+     */
+    private getArtistStream(id: number): Observable<Artist> {
         return this.http
             .get<Artist>(`${this.request_url}/artist/${id}`)
             .pipe(
@@ -78,7 +106,14 @@ export class ArtistDetailsService {
             );
     }
 
-    public getArtistsTopSongsStream(id: number): Observable<TrackResponse> {
+    /**
+     * Builds top songs HTTP request
+     *
+     * @param id The ID of the artist
+     *
+     * @returns Observable of track response
+     */
+    private getArtistsTopSongsStream(id: number): Observable<TrackResponse> {
         return this.http
             .get<TrackResponse>(`${this.request_url}/artist/${id}/top`)
             .pipe(
@@ -86,7 +121,14 @@ export class ArtistDetailsService {
             );
     }
 
-    public getArtistsAlbumsStream(id: number): Observable<AlbumResponse> {
+    /**
+     * Builds albums HTTP request
+     *
+     * @param id The ID of the artist
+     *
+     * @returns Observable of album response
+     */
+    private getArtistsAlbumsStream(id: number): Observable<AlbumResponse> {
         return this.http
             .get<AlbumResponse>(`${this.request_url}/artist/${id}/albums`)
             .pipe(
@@ -94,18 +136,33 @@ export class ArtistDetailsService {
             );
     }
 
-    private storeArtistStream(id: number): void {
-        const $artist_stream = this.getArtistStream(id);
-        this.artist_stream_map.set(id, $artist_stream);
+    /**
+     * Stores artist stream
+     *
+     * @param identifier The key to use when storing the request
+     */
+    private storeArtistStream(identifier: number): void {
+        const $artist_stream = this.getArtistStream(identifier);
+        this.artist_stream_map.set(identifier, $artist_stream);
     }
 
-    private storeArtistsTopSongsStream(id: number): void {
-        const $track_stream = this.getArtistsTopSongsStream(id);
-        this.artist_top_songs_stream_map.set(id, $track_stream);
+    /**
+     * Stores top songs stream
+     *
+     * @param identifier The key to use when storing the request
+     */
+    private storeArtistsTopSongsStream(identifier: number): void {
+        const $track_stream = this.getArtistsTopSongsStream(identifier);
+        this.artist_top_songs_stream_map.set(identifier, $track_stream);
     }
 
-    private storeArtistsAlbumsStream(id: number): void {
-        const $album_stream = this.getArtistsAlbumsStream(id);
-        this.artist_albums_stream_map.set(id, $album_stream);
+    /**
+     * Stores albums stream
+     *
+     * @param identifier The key to use when storing the request
+     */
+    private storeArtistsAlbumsStream(identifier: number): void {
+        const $album_stream = this.getArtistsAlbumsStream(identifier);
+        this.artist_albums_stream_map.set(identifier, $album_stream);
     }
 }

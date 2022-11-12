@@ -94,13 +94,12 @@ export class ArtistListingService {
     }
 
     /**
-     * Stores the artist request into a map
+     * Stores the artist stream
      *
      * @param identifier The key to use when storing the request
      */
     private storeArtistStream(identifier: string): void {
         const $artist_stream = this.getArtist(identifier);
-
         this.artist_stream_map.set(identifier, $artist_stream);
     }
 }
