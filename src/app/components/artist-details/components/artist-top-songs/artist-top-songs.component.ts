@@ -67,6 +67,7 @@ export class ArtistTopSongsComponent implements OnInit, OnDestroy {
         } else {
             if (url === this.current_audio_clip) {
                 this.audio_element.nativeElement.pause();
+                this.current_audio_clip = '';
                 this.playing_song = false;
             } else {
                 this.initAudioEl(url);
