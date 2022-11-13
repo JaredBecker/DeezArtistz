@@ -21,6 +21,8 @@ export class ArtistTopSongsComponent implements OnChanges, OnDestroy {
         private artistDetailsService: ArtistDetailsService
     ) { }
 
+    // TODO: add in audio tag so you can play track preview
+
     public ngOnChanges(): void {
         // If new changes come in kill old subscription
         this.top_songs_sub?.unsubscribe();

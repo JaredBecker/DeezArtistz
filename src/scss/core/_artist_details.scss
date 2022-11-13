@@ -78,3 +78,20 @@
         }
     }
 }
+
+.artist_albums {
+    padding: 2rem 0;
+
+    .album {
+        text-decoration: none;
+        color: #212529;
+
+        &_title {
+            font-weight: bold;
+        }
+
+        &_date {
+            font-weight: 300;
+        }
+    }
+}
