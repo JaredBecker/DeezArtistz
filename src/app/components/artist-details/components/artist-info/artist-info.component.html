@@ -1,5 +1,5 @@
 <ng-container *ngIf="!loading_artist && artist; else artist_info_placeholder">
-    <div class="artist_info">
+    <div class="artist_info" data-aos="fade-up" data-aos-delay="200">
         <div class="artist_info_image">
             <img [src]="artist.picture_medium" [alt]="artist.name" />
         </div>

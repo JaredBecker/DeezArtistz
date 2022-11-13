@@ -1,10 +1,10 @@
 <section class="top_songs">
     <h2 class="title">Top Tracks</h2>
-    <ul class="top_songs_list">
+    <ul class="top_songs_list"  data-aos="fade-up" data-aos-delay="200">
         <ng-container *ngIf="!loading_top_songs && top_songs.length > 0; else artist_top_songs_placeholder">
             <li
-                class="top_songs_list_item"
                 *ngFor="let song of top_songs"
+                class="top_songs_list_item"
                 (click)="playSongPreview(song.preview)"
             >
                 <div class="track_image position-relative">
