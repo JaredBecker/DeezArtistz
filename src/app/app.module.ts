@@ -14,6 +14,7 @@ import { ArtistInfoComponent } from './components/artist-details/components/arti
 import { ArtistTopSongsComponent } from './components/artist-details/components/artist-top-songs/artist-top-songs.component';
 import { ArtistAlbumsComponent } from './components/artist-details/components/artist-albums/artist-albums.component';
 import { ArtistCardPlaceholderComponent } from './components/artist-listing/components/artist-card-placeholder/artist-card-placeholder.component';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { ArtistCardPlaceholderComponent } from './components/artist-listing/comp
         ArtistTopSongsComponent,
         ArtistAlbumsComponent,
         ArtistCardPlaceholderComponent,
+        TimeFormatPipe,
     ],
     imports: [
         BrowserModule,
