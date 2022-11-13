@@ -1,6 +1,6 @@
 <div class="artist_info" *ngIf="!loading_artist && artist">
     <div class="artist_info_image">
-        <img [src]="artist.picture_medium" [alt]="artist.name + 'image'" />
+        <img [src]="artist.picture_medium" [alt]="artist.name" />
     </div>
     <div class="artist_info_details">
         <h1 class="title">{{ artist.name }}</h1>

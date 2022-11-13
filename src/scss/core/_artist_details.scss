@@ -40,3 +40,41 @@
         }
     }
 }
+
+.top_songs {
+    padding: 2rem 0;
+
+    .top_songs_list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        &_item {
+            display: flex;
+            margin-bottom: 0.5rem;
+
+            .track_info {
+                &_title {
+                    font-weight: bold;
+                }
+
+                .explicit {
+                    height: 1.25rem;
+                    width: 1.25rem;
+                    background-color: #43434f;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 0.25rem;
+                    font-size: 0.75rem;
+                }
+            }
+
+            .track_duration {
+                margin-right: 1rem;
+                font-weight: 300;
+            }
+        }
+    }
+}
