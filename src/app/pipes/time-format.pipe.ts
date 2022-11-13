@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimeFormatPipe implements PipeTransform {
     public transform(time_in_sec: any) {
-        const min = Math.floor(time_in_sec / 60);
-        const sec = time_in_sec - (min * 60);
+        let min = Math.floor(time_in_sec / 60);
+        let sec = time_in_sec - (min * 60);
 
-        return min > 0 ? `${min}:${sec}` : time_in_sec;
+        return min > 0 ? `${min}:${sec < 10 ? `0${sec}` : sec}` : time_in_sec;
     }
 }

@@ -14,13 +14,8 @@ import { TrackResponse } from '../models/track-response.interface';
 export class ArtistDetailsService {
     private proxy_url: string = environment.proxy_url ?? '';
     private api_url: string = environment.api_url ?? '';
-    private production_mode: boolean = environment.production;
 
     private request_url: string = `${this.proxy_url}${this.api_url}`;
-
-    // private request_url: string = this.production_mode ?
-    //     `${this.api_url}` :
-    //     `${this.proxy_url}${this.api_url}`;
 
     private artist_stream_map = new Map<number, Observable<Artist>>();
     private artist_top_songs_stream_map = new Map<number, Observable<TrackResponse>>();

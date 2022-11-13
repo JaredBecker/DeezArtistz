@@ -52,10 +52,29 @@
         &_item {
             display: flex;
             margin-bottom: 0.5rem;
+            transition: all 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+            border: 1px solid transparent;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 0 10px -5px rgba(#000, 0.6);
+                border-color: $primary;
+            }
+
+            .track_image {
+                flex-shrink: 0;
+            }
 
             .track_info {
                 &_title {
                     font-weight: bold;
+                    font-size: 0.875rem;
+
+                    @include media-breakpoint-up(sm) {
+                        font-size: 1rem;
+                    }
                 }
 
                 .explicit {
@@ -85,6 +104,9 @@
     .album {
         text-decoration: none;
         color: #212529;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
 
         &_title {
             font-weight: bold;
@@ -92,6 +114,7 @@
 
         &_date {
             font-weight: 300;
+            margin-top: auto;
         }
     }
 }
