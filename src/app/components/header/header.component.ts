@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ArtistListingService } from 'src/app/services/artist-listing.service';
 
@@ -11,7 +12,7 @@ export class HeaderComponent {
     public search = new FormControl('');
 
     constructor(
-        private artistListingService: ArtistListingService,
+        private router: Router,
     ) { }
 
     /**
@@ -20,10 +21,10 @@ export class HeaderComponent {
      * @param event Keydown event
      */
     public onSearchArtistsEnter(event: KeyboardEvent): void {
-        if (event?.key === 'Enter') {
-            // TODO: add validation to make sure field is filled out first
-            this.artistListingService.onSearch(this.search.value);
+        if (event?.key === 'Enter' && this.search.value !== '') {
+            this.router.navigateByUrl(`/search/${encodeURI(this.search.value)}`);
         }
+        // TODO: add toaster and give feedback
     }
 
     /**
@@ -32,7 +33,9 @@ export class HeaderComponent {
      * @param event Keydown event
      */
     public onSearchArtistsClick(): void {
-        // TODO: add validation to make sure field is filled out first
-        this.artistListingService.onSearch(this.search.value);
+        if (this.search.value !== '') {
+            this.router.navigateByUrl(`/search/${encodeURI(this.search.value)}`);
+        }
+        // TODO: add toaster and give feedback
     }
 }

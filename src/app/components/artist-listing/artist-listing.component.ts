@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { of, Subscription, switchMap } from 'rxjs';
 
 import { Artist } from 'src/app/models/artist.model';
+import { ArtistResponse } from 'src/app/models/artist-response.interface';
 import { ArtistListingService } from 'src/app/services/artist-listing.service';
 
 @Component({
@@ -11,25 +13,44 @@ import { ArtistListingService } from 'src/app/services/artist-listing.service';
 })
 export class ArtistListingComponent implements OnInit, OnDestroy {
     public artists: Artist[] = [];
+    public loading_artists: boolean = false;
+    public placeholders: any[] = Array(18);
 
-    private artist_sub?: Subscription;
+    private artists_sub?: Subscription;
 
     constructor(
-        private artistListingService: ArtistListingService
+        private route: ActivatedRoute,
+        private artistListingService: ArtistListingService,
     ) { }
 
     public ngOnInit(): void {
-        // Listening for results from the search in the header
-        this.artist_sub = this.artistListingService
-            .onSearchArtist()
+        this.route.paramMap
+            .pipe(
+                switchMap((paramMap) => {
+                    this.loading_artists = true;
+
+                    const search_phrase = paramMap.get('search_phrase') ?? '';
+
+                    if (search_phrase !== '') {
+                        return this.artistListingService.getArtists(search_phrase);
+                    } else {
+                        return of({} as ArtistResponse)
+                    }
+                }),
+            )
             .subscribe({
-                next: (res_data) => {
-                    this.artists = res_data.data;
-                }
+                next: (artists_response) => {
+                    if (artists_response.data) {
+                        this.artists = artists_response.data;
+                    }
+
+                    this.loading_artists = false;
+                },
+                error: () => this.loading_artists = false,
             })
     }
 
     public ngOnDestroy(): void {
-        this.artist_sub?.unsubscribe();
+        this.artists_sub?.unsubscribe();
     }
 }

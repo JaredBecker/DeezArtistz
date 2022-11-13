@@ -2,6 +2,10 @@
     --timing-function: 0.2s cubic-bezier(0.215, 0.610, 0.355, 1)
 }
 
+.artist_card_placeholder {
+    cursor: wait;
+}
+
 .artist_card {
     display: flex;
     flex-direction: column;

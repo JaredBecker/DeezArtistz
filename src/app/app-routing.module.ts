@@ -9,7 +9,16 @@ const routes: Routes = [
     {
         path: '',
         component: ArtistListingComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+    },
+    {
+        path: 'search/:search_phrase',
+        children: [
+            {
+                path: '',
+                component: ArtistListingComponent,
+            }
+        ]
     },
     {
         path: 'artist/:id',

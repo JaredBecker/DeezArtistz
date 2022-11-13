@@ -13,6 +13,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ArtistInfoComponent } from './components/artist-details/components/artist-info/artist-info.component';
 import { ArtistTopSongsComponent } from './components/artist-details/components/artist-top-songs/artist-top-songs.component';
 import { ArtistAlbumsComponent } from './components/artist-details/components/artist-albums/artist-albums.component';
+import { ArtistCardPlaceholderComponent } from './components/artist-listing/components/artist-card-placeholder/artist-card-placeholder.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { ArtistAlbumsComponent } from './components/artist-details/components/ar
         ArtistInfoComponent,
         ArtistTopSongsComponent,
         ArtistAlbumsComponent,
+        ArtistCardPlaceholderComponent,
     ],
     imports: [
         BrowserModule,
