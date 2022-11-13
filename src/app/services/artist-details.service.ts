@@ -16,9 +16,11 @@ export class ArtistDetailsService {
     private api_url: string = environment.api_url ?? '';
     private production_mode: boolean = environment.production;
 
-    private request_url: string = this.production_mode ?
-        `${this.api_url}` :
-        `${this.proxy_url}${this.api_url}`;
+    private request_url: string = `${this.proxy_url}${this.api_url}`;
+
+    // private request_url: string = this.production_mode ?
+    //     `${this.api_url}` :
+    //     `${this.proxy_url}${this.api_url}`;
 
     private artist_stream_map = new Map<number, Observable<Artist>>();
     private artist_top_songs_stream_map = new Map<number, Observable<TrackResponse>>();
@@ -100,7 +102,7 @@ export class ArtistDetailsService {
      */
     private getArtistStream(id: number): Observable<Artist> {
         return this.http
-            .get<Artist>(`${this.request_url}/artist/${id}`)
+            .get<Artist>(`${this.request_url}artist/${id}`)
             .pipe(
                 shareReplay(1)
             );
@@ -115,7 +117,7 @@ export class ArtistDetailsService {
      */
     private getArtistsTopSongsStream(id: number): Observable<TrackResponse> {
         return this.http
-            .get<TrackResponse>(`${this.request_url}/artist/${id}/top`)
+            .get<TrackResponse>(`${this.request_url}artist/${id}/top`)
             .pipe(
                 shareReplay(1)
             );
@@ -130,7 +132,7 @@ export class ArtistDetailsService {
      */
     private getArtistsAlbumsStream(id: number): Observable<AlbumResponse> {
         return this.http
-            .get<AlbumResponse>(`${this.request_url}/artist/${id}/albums`)
+            .get<AlbumResponse>(`${this.request_url}artist/${id}/albums`)
             .pipe(
                 shareReplay(1)
             );

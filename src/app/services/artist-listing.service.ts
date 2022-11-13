@@ -14,9 +14,11 @@ export class ArtistListingService {
     private api_url: string = environment.api_url ?? '';
     private production_mode: boolean = environment.production;
 
-    private request_url: string = this.production_mode ?
-        `${this.api_url}` :
-        `${this.proxy_url}${this.api_url}`;
+    private request_url: string = `${this.proxy_url}${this.api_url}`;
+
+    // private request_url: string = this.production_mode ?
+    //     `${this.api_url}` :
+    //     `${this.proxy_url}${this.api_url}`;
 
     // Setting up maps to store requests that have been made so if the
     // same request comes through I don't have to query the server again
@@ -59,7 +61,7 @@ export class ArtistListingService {
      */
     private getArtistStream(artist: string): Observable<ArtistResponse> {
         return this.http
-            .get<ArtistResponse>(`${this.request_url}/search/artist?q=${artist}`)
+            .get<ArtistResponse>(`${this.request_url}search/artist?q=${artist}`)
             .pipe(
                 shareReplay(1)
             );
