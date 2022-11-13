@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subscription, switchMap, throwError } from 'rxjs';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
 
 import { Album } from 'src/app/models/album.model';
+import { AlbumResponse } from 'src/app/models/album-response.interface';
 import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 
 @Component({
@@ -31,19 +32,19 @@ export class ArtistAlbumsComponent implements OnInit, OnDestroy {
                     if (+id) {
                         return this.artistDetailsService.getArtistsAlbumsByID(+id);
                     } else {
-                        return throwError(() => new Error(`No albums found for artist with the id: ${id}`));
+                        return of({} as AlbumResponse);
                     }
                 })
             )
             .subscribe({
                 next: (album_response) => {
-                    this.albums = album_response.data;
+                    if (album_response.data) {
+                        this.albums = album_response.data;
+                    }
+
                     this.loading_albums = false;
-                    console.log(this.albums);
                 },
-                error: () => {
-                    this.loading_albums = false;
-                }
+                error: () => this.loading_albums = false,
             })
     }
 

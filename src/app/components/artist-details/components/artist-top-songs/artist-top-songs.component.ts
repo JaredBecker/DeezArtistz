@@ -1,8 +1,9 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import { Observable, Subscription, switchMap, throwError } from 'rxjs';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
 
 import { Track } from 'src/app/models/track.model';
+import { TrackResponse } from 'src/app/models/track-response.interface';
 import { ArtistDetailsService } from 'src/app/services/artist-details.service';
 
 @Component({
@@ -37,18 +38,19 @@ export class ArtistTopSongsComponent implements OnInit, OnDestroy {
                     if (+id) {
                         return this.artistDetailsService.getArtistsTopSongsByID(+id);
                     } else {
-                        return throwError(() => new Error(`No tracks found for artist with the id: ${id}`));
+                        return of({} as TrackResponse);
                     }
                 })
             )
             .subscribe({
                 next: (track_response) => {
-                    this.top_songs = track_response.data;
+                    if (track_response.data) {
+                        this.top_songs = track_response.data;
+                    }
+
                     this.loading_top_songs = false;
                 },
-                error: () => {
-                    this.loading_top_songs = false;
-                }
+                error: () => this.loading_top_songs = false,
             })
     }
 

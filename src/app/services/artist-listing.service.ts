@@ -24,8 +24,7 @@ export class ArtistListingService {
     ) { }
 
     /**
-     * Checks if a previous request has been made with the same search phrase and
-     * returns that or stores the new request into the map and then returns the stream
+     * Gets list of artists the provided using search phrase
      *
      * @param artist The name of the artist to search for
      *

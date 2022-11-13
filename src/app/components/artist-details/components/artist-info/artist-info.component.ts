@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subscription, switchMap, throwError } from 'rxjs';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
 
 import { Artist } from 'src/app/models/artist.model';
 import { ArtistDetailsService } from 'src/app/services/artist-details.service';
@@ -30,18 +30,19 @@ export class ArtistInfoComponent implements OnInit, OnDestroy {
                     if (+id) {
                         return this.artistDetailsService.getArtistByID(+id);
                     } else {
-                        return throwError(() => new Error(`No artist found with the id: ${id}`));
+                        return of({} as Artist);
                     }
                 })
             )
             .subscribe({
                 next: (artist) => {
-                    this.artist = artist;
+                    if (artist) {
+                        this.artist = artist;
+                    }
+
                     this.loading_artist = false;
                 },
-                error: () => {
-                    this.loading_artist = false;
-                }
+                error: () => this.loading_artist = false,
             })
     }
 

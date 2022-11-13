@@ -68,7 +68,7 @@ export class ArtistDetailsService {
     }
 
     /**
-     * Gets artists albums songs for the provided ID
+     * Gets artists albums for the provided ID
      *
      * @param id The ID of the artist
      *
