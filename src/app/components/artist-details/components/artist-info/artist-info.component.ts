@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription, switchMap, throwError } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
     selector: 'app-artist-info',
     templateUrl: './artist-info.component.html',
 })
-export class ArtistInfoComponent implements OnChanges, OnDestroy {
+export class ArtistInfoComponent implements OnInit, OnDestroy {
     @Input() $route!: Observable<string>;
 
     public artist?: Artist;
@@ -21,10 +21,7 @@ export class ArtistInfoComponent implements OnChanges, OnDestroy {
         private artistDetailsService: ArtistDetailsService
     ) { }
 
-    public ngOnChanges(): void {
-        // If new changes come in kill old subscription
-        this.artist_sub?.unsubscribe();
-
+    public ngOnInit(): void {
         this.artist_sub = this.$route
             .pipe(
                 switchMap((id) => {

@@ -1,18 +1,30 @@
-<div class="artist_info" *ngIf="!loading_artist && artist">
-    <div class="artist_info_image">
-        <img [src]="artist.picture_medium" [alt]="artist.name" />
+<ng-container *ngIf="!loading_artist && artist; else artist_info_placeholder">
+    <div class="artist_info">
+        <div class="artist_info_image">
+            <img [src]="artist.picture_medium" [alt]="artist.name" />
+        </div>
+        <div class="artist_info_details">
+            <h1 class="title">{{ artist.name }}</h1>
+            <ul class="artist_info_details_stats">
+                <li class="artist_info_details_stats_item">
+                    <i
+                        class="fa-solid fa-compact-disc fa-fw me-2"
+                        aria-hidden="true"
+                    ></i>
+                    {{ artist.nb_album }} Albums
+                </li>
+                <li class="artist_info_details_stats_item">
+                    <i
+                        class="fa-solid fa-users fa-fw me-2"
+                        aria-hidden="true"
+                    ></i>
+                    {{ artist.nb_fan }} Fans
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="artist_info_details">
-        <h1 class="title">{{ artist.name }}</h1>
-        <ul class="artist_info_details_stats">
-            <li class="artist_info_details_stats_item">
-                <i class="fa-solid fa-compact-disc fa-fw me-2" aria-hidden="true"></i>
-                {{ artist.nb_album }} Albums
-            </li>
-            <li class="artist_info_details_stats_item">
-                <i class="fa-solid fa-users fa-fw me-2" aria-hidden="true"></i>
-                {{ artist.nb_fan }} Fans
-            </li>
-        </ul>
-    </div>
-</div>
+</ng-container>
+
+<ng-template #artist_info_placeholder>
+    <app-artist-info-placeholder></app-artist-info-placeholder>
+</ng-template>

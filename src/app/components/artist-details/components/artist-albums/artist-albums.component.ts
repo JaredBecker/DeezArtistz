@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription, switchMap, throwError } from 'rxjs';
 
@@ -9,11 +9,12 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
     selector: 'app-artist-albums',
     templateUrl: './artist-albums.component.html',
 })
-export class ArtistAlbumsComponent implements OnChanges, OnDestroy {
+export class ArtistAlbumsComponent implements OnInit, OnDestroy {
     @Input() $route!: Observable<string>;
 
     public albums: Album[] = [];
     public loading_albums: boolean = true;
+    public placeholders: any[] = new Array(18);
 
     private albums_sub?: Subscription;
 
@@ -21,10 +22,7 @@ export class ArtistAlbumsComponent implements OnChanges, OnDestroy {
         private artistDetailsService: ArtistDetailsService,
     ) { }
 
-    public ngOnChanges(): void {
-        // If new changes come in kill old subscription
-        this.albums_sub?.unsubscribe();
-
+    public ngOnInit(): void {
         this.albums_sub = this.$route
             .pipe(
                 switchMap((id) => {
@@ -41,7 +39,6 @@ export class ArtistAlbumsComponent implements OnChanges, OnDestroy {
                 next: (album_response) => {
                     this.albums = album_response.data;
                     this.loading_albums = false;
-                    console.log(this.albums);
                 },
                 error: () => {
                     this.loading_albums = false;

@@ -1,21 +1,27 @@
 <section class="top_songs">
     <h2 class="title">Top Tracks</h2>
-    <ul class="top_songs_list" *ngIf="!loading_top_songs && top_songs.length > 0">
-        <li class="top_songs_list_item" *ngFor="let song of top_songs">
-            <div class="track_image">
-                <img class="img-fluid rounded" [src]="song.album.cover_small" [alt]="song.album.title + ' cover'">
-            </div>
-            <div class="track_info d-flex flex-column justify-content-between ms-2">
-                <h6 class="track_info_title mb-0">
-                    {{ song.title }}
-                </h6>
-                <div class="explicit">
-                    E
+    <ul class="top_songs_list">
+        <ng-container *ngIf="!loading_top_songs && top_songs.length > 0; else artist_top_songs_placeholder">
+            <li class="top_songs_list_item" *ngFor="let song of top_songs">
+                <div class="track_image">
+                    <img class="img-fluid rounded" [src]="song.album.cover_small" [alt]="song.album.title + ' cover'">
                 </div>
-            </div>
-            <div class="track_duration d-flex align-items-center ms-auto">
-                {{ song.duration | timeFormat }}
-            </div>
-        </li>
+                <div class="track_info d-flex flex-column justify-content-between ms-2">
+                    <h6 class="track_info_title mb-0">
+                        {{ song.title }}
+                    </h6>
+                    <div class="explicit" *ngIf="song.explicit_lyrics">
+                        E
+                    </div>
+                </div>
+                <div class="track_duration d-flex align-items-center ms-auto">
+                    {{ song.duration | timeFormat }}
+                </div>
+            </li>
+        </ng-container>
+
+        <ng-template #artist_top_songs_placeholder>
+            <app-artist-top-songs-placeholder *ngFor="let placeholder of placeholders"></app-artist-top-songs-placeholder>
+        </ng-template>
     </ul>
 </section>

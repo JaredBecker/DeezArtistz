@@ -1,18 +1,26 @@
 <section class="artist_albums">
     <h2 class="title">Albums</h2>
-    <div class="row" *ngIf="!loading_albums && albums.length > 0">
-        <div *ngFor="let album of albums" class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3">
-            <a [href]="album.link" target="_blank" class="album">
-                <div class="album_cover ratio ratio-1x1">
-                    <img class="rounded" [src]="album.cover_medium" [alt]="album.title">
-                </div>
-                <div class="album_title">
-                    {{ album.title }}
-                </div>
-                <div class="album_date">
-                    {{ album.release_date | date: 'yyyy' }}
-                </div>
-            </a>
-        </div>
+    <div class="row">
+        <ng-container *ngIf="!loading_albums && albums.length > 0; else artist_albums_placeholder">
+            <div *ngFor="let album of albums" class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3">
+                <a [href]="album.link" target="_blank" class="album">
+                    <div class="album_cover ratio ratio-1x1">
+                        <img class="rounded" [src]="album.cover_medium" [alt]="album.title">
+                    </div>
+                    <div class="album_title">
+                        {{ album.title }}
+                    </div>
+                    <div class="album_date">
+                        {{ album.release_date | date: 'yyyy' }}
+                    </div>
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-template #artist_albums_placeholder>
+            <div *ngFor="let placeholder of placeholders" class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3">
+                <app-artist-albums-placeholder></app-artist-albums-placeholder>
+            </div>
+        </ng-template>
     </div>
 </section>

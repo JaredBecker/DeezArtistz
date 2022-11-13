@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription, switchMap, throwError } from 'rxjs';
 
@@ -9,11 +9,12 @@ import { ArtistDetailsService } from 'src/app/services/artist-details.service';
     selector: 'app-artist-top-songs',
     templateUrl: './artist-top-songs.component.html',
 })
-export class ArtistTopSongsComponent implements OnChanges, OnDestroy {
+export class ArtistTopSongsComponent implements OnInit, OnDestroy {
     @Input() $route!: Observable<string>;
 
     public top_songs: Track[] = [];
     public loading_top_songs: boolean = true;
+    public placeholders: any[] = new Array(5);
 
     private top_songs_sub?: Subscription;
 
@@ -23,10 +24,7 @@ export class ArtistTopSongsComponent implements OnChanges, OnDestroy {
 
     // TODO: add in audio tag so you can play track preview
 
-    public ngOnChanges(): void {
-        // If new changes come in kill old subscription
-        this.top_songs_sub?.unsubscribe();
-
+    public ngOnInit(): void {
         this.top_songs_sub = this.$route
             .pipe(
                 switchMap((id) => {

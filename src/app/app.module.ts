@@ -15,6 +15,9 @@ import { ArtistTopSongsComponent } from './components/artist-details/components/
 import { ArtistAlbumsComponent } from './components/artist-details/components/artist-albums/artist-albums.component';
 import { ArtistCardPlaceholderComponent } from './components/artist-listing/components/artist-card-placeholder/artist-card-placeholder.component';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
+import { ArtistInfoPlaceholderComponent } from './components/artist-details/components/artist-info-placeholder/artist-info-placeholder.component';
+import { ArtistTopSongsPlaceholderComponent } from './components/artist-details/components/artist-top-songs-placeholder/artist-top-songs-placeholder.component';
+import { ArtistAlbumsPlaceholderComponent } from './components/artist-details/components/artist-albums-placeholder/artist-albums-placeholder.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +32,9 @@ import { TimeFormatPipe } from './pipes/time-format.pipe';
         ArtistAlbumsComponent,
         ArtistCardPlaceholderComponent,
         TimeFormatPipe,
+        ArtistInfoPlaceholderComponent,
+        ArtistTopSongsPlaceholderComponent,
+        ArtistAlbumsPlaceholderComponent,
     ],
     imports: [
         BrowserModule,
