@@ -2,9 +2,22 @@
     <h2 class="title">Top Tracks</h2>
     <ul class="top_songs_list">
         <ng-container *ngIf="!loading_top_songs && top_songs.length > 0; else artist_top_songs_placeholder">
-            <li class="top_songs_list_item" *ngFor="let song of top_songs">
-                <div class="track_image">
-                    <img class="img-fluid rounded" [src]="song.album.cover_small" [alt]="song.album.title + ' cover'">
+            <li
+                class="top_songs_list_item"
+                *ngFor="let song of top_songs"
+                (click)="playSongPreview(song.preview)"
+            >
+                <div class="track_image position-relative">
+                    <img
+                        class="img-fluid rounded"
+                        [src]="song.album.cover_small"
+                        [alt]="song.album.title + ' cover'"
+                    >
+                    <i
+                        class="fa-solid text-white song_control"
+                        [ngClass]="song.preview === current_audio_clip ? 'fa-pause' : 'fa-play'"
+                        aria-hidden="true"
+                    ></i>
                 </div>
                 <div class="track_info d-flex flex-column justify-content-between ms-2">
                     <h6 class="track_info_title mb-0">
@@ -21,7 +34,11 @@
         </ng-container>
 
         <ng-template #artist_top_songs_placeholder>
-            <app-artist-top-songs-placeholder *ngFor="let placeholder of placeholders"></app-artist-top-songs-placeholder>
+            <app-artist-top-songs-placeholder
+                *ngFor="let placeholder of placeholders"
+            ></app-artist-top-songs-placeholder>
         </ng-template>
     </ul>
+
+    <audio #audio_element></audio>
 </section>

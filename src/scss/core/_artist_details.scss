@@ -61,10 +61,22 @@
                 cursor: pointer;
                 box-shadow: 0 0 10px -5px rgba(#000, 0.6);
                 border-color: $primary;
+
+                & .song_control {
+                    display: block !important;
+                }
             }
 
             .track_image {
                 flex-shrink: 0;
+
+                .song_control {
+                    position: absolute;
+                    right: 50%;
+                    top: 50%;
+                    transform: translate(50%,-50%);
+                    display: none;
+                }
             }
 
             .track_info {
