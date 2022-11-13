@@ -39,6 +39,7 @@ export class ArtistAlbumsComponent implements OnInit, OnDestroy {
                 next: (album_response) => {
                     this.albums = album_response.data;
                     this.loading_albums = false;
+                    console.log(this.albums);
                 },
                 error: () => {
                     this.loading_albums = false;
